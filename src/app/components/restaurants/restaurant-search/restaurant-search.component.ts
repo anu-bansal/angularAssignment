@@ -1,6 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { RestaurantService } from '../../../services/restaurant.service'
-import {NgForm} from '@angular/forms';
+import { RestaurantService } from '../../../services/restaurant.service';
 
 @Component({
   selector: 'app-restaurant-search',
@@ -10,8 +9,9 @@ import {NgForm} from '@angular/forms';
 })
 export class RestaurantSearchComponent implements OnInit {
   @Output() success = new EventEmitter<any>();
-	public searchedRestaurant: any='';
-	public restaurantsList=[];
+
+	public searchedRestaurant: string="";
+	public restaurantsList : any;
   constructor(private restaurantService : RestaurantService) { }
 
   ngOnInit() {
@@ -21,12 +21,13 @@ export class RestaurantSearchComponent implements OnInit {
   searchRestaurant(){
   	this.restaurantService.searchRestaurant(this.searchedRestaurant)
   	.subscribe((res) =>{
-  		this.restaurantsList=res.results;
+  		this.restaurantsList=res.restaurants;
+      console.log(this.restaurantsList);
   		this.success.emit({
   			'restaurantsList':this.restaurantsList
   		});
   	},(error) =>{
 
-  	})
+  	});
   }
 }

@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RestaurantsComponent implements OnInit {
 
-  public restaurants =[];
+  restaurants =[];
 
   constructor() { }
 
@@ -16,5 +16,6 @@ export class RestaurantsComponent implements OnInit {
   // Update restaurants list based on search text
   setRestaurantlist(event) {
   	this.restaurants = event.restaurantsList;
+    console.log("in Parent:"+this.restaurants);
   }
 }

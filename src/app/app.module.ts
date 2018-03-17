@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import {FormsModule} from '@angular/forms';
+import {HttpModule} from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/shared/header/header.component';
@@ -11,7 +12,13 @@ import { RestaurantListComponent } from './components/restaurants/restaurant-lis
 import { RestaurantComponent } from './components/restaurants/restaurant-list/restaurant/restaurant.component';
 import { FavRestaurantsComponent } from './components/fav-restaurants/fav-restaurants.component';
 import { FavRestaurantComponent } from './components/fav-restaurants/fav-restaurant/fav-restaurant.component';
+import { RouterModule, Routes } from '@angular/router';
 
+const routes:Routes=[
+  {path:'restaurants',component:RestaurantsComponent},
+  {path:'favourites',component:FavRestaurantsComponent},
+  { path: '', redirectTo: 'restaurants', pathMatch: 'full' }
+];
 
 @NgModule({
   declarations: [
@@ -26,8 +33,12 @@ import { FavRestaurantComponent } from './components/fav-restaurants/fav-restaur
     FavRestaurantComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule,
+    HttpModule,
+    RouterModule.forRoot(routes)  
   ],
+  exports: [ RouterModule ],
   providers: [],
   bootstrap: [AppComponent]
 })
